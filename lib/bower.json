@@ -1,0 +1,20 @@
+{
+  "name": "jquerytodo",
+  "description": "assignment in class",
+  "main": "Gruntfile.js",
+  "authors": [
+    "Max Baldwin"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "jquery"
+  ],
+  "homepage": "https://github.com/maxbaldwin/Jquery-todo",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
