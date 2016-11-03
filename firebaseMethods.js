@@ -2,11 +2,11 @@
 
 var FbAPI = (function(oldFirebase){
 
-  oldFirebase.getTodos = function(apiKeys){
+  oldFirebase.getTodos = function(apiKeys, uid){
     return new Promise((resolve, reject) => {
       $.ajax({
         method:  'GET',
-        url:`${apiKeys.databaseURL}/items.json`
+        url:`${apiKeys.databaseURL}/items.json?orderBy="uid"&equalTo="${uid}"`
       }).then((response) => {
         let items = [];
         Object.keys(response).forEach(function(key){
@@ -20,15 +20,15 @@ var FbAPI = (function(oldFirebase){
     });
   };
 
-  oldFirebase.addTodo = function(apiKeys, newItem){
+ oldFirebase.addTodo = function(apiKeys, newItem){
     return new Promise((resolve, reject) => {
       $.ajax({
-        method:  'POST',
+        method:  'POST', 
         url:`${apiKeys.databaseURL}/items.json`,
-        data: JSON.stringify(newItem), 
+        data: JSON.stringify(newItem),
         dataType: 'json'
       }).then((response) => {
-        console.log("response from POST", response); 
+        console.log("response from POST", response);
         resolve(response);
       }, (error) => {
         reject(error);
@@ -36,13 +36,14 @@ var FbAPI = (function(oldFirebase){
     });
   };
 
-    oldFirebase.deleteTodo = function(apiKeys, itemId){
+
+oldFirebase.deleteTodo = function(apiKeys, itemId){
     return new Promise((resolve, reject) => {
       $.ajax({
-        method:  'DELETE',
-        url:`${apiKeys.databaseURL}/items/${itemId}.json`,
+        method:  'DELETE', 
+        url:`${apiKeys.databaseURL}/items/${itemId}.json`
       }).then((response) => {
-        console.log("response from DELETE", response); 
+        console.log("response from Delete", response);
         resolve(response);
       }, (error) => {
         reject(error);
@@ -50,24 +51,29 @@ var FbAPI = (function(oldFirebase){
     });
   };
 
-
-    oldFirebase.editTodo = function(apiKeys, itemId, editedItem){
+ oldFirebase.editTodo = function(apiKeys, itemId, editedItem){
     return new Promise((resolve, reject) => {
       $.ajax({
-        method:  'PUT',
+        method:  'PUT', 
         url:`${apiKeys.databaseURL}/items/${itemId}.json`,
-        data: JSON.stringify(editedItem), 
+        data: JSON.stringify(editedItem),
         dataType: 'json'
       }).then((response) => {
-        console.log("response from PUT", response); 
+        console.log("response from PUT", response);
         resolve(response);
       }, (error) => {
         reject(error);
       });
     });
   };
+
+
+
 
 
 
   return oldFirebase;
 })(FbAPI || {});
+
+
+
